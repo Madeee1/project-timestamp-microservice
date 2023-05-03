@@ -91,7 +91,7 @@ app.get("/api/:date?", function (req, res) {
       naturalDate = unixToNat(unix);
     } else if (!isNaN(Date.parse(date))) {
       // Get Unix of date
-      dateObj = new Date(date);
+      let dateObj = new Date(date);
       unix = dateObj.getTime();
       naturalDate = unixToNat(unix);
     } else {
@@ -149,6 +149,11 @@ function unixToNat(unix) {
   let hours = dateObj.getUTCHours();
   let minutes = dateObj.getUTCMinutes();
   let seconds = dateObj.getUTCSeconds();
+
+  if (date < 10) {date = "0" + date};
+  if (hours < 10) {hours = "0" + hours};
+  if (minutes < 10) {minutes = "0" + minutes};
+  if (seconds < 10) {seconds = "0" + seconds};
 
   let natDate =
     day +
