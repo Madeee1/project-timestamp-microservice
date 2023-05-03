@@ -31,6 +31,16 @@ var listener = app.listen(process.env.PORT, function () {
   console.log('Your app is listening on port ' + listener.address().port);
 });
 
+//Answering a get request into /api
+app.get("/api", function (req, res) {
+  //Get unix  now
+  let unix = Date.now();
+  //Get natural date now
+  let naturalDate = unixToNat(unix);
+  //Return the JSON of unix and natural date
+  res.json({ unix: parseInt(unix), utc: naturalDate });
+});
+
 //Answering a get request into /api/:date?
 app.get("/api/:date?", function (req, res) {
   let date = req.params.date;
